@@ -1,0 +1,25 @@
+version: '3.7'
+
+services:
+  rabbitmq:
+    image: "rabbitmq:management"
+    ports:
+      - "15672:15672" # Management dashboard
+      - "5672:5672"   # AMQP protocol
+    environment:
+      RABBITMQ_DEFAULT_USER: user
+      RABBITMQ_DEFAULT_PASS: password
+    labels:
+      NAME: "rabbitmq"
+
+  mongodb:
+    image: "mongo:latest"
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    labels:
+      NAME: "mongodb"
+
+volumes:
+  mongodb_data:
